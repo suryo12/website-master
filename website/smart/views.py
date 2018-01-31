@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializer import NodeIDSerializer
 from django.contrib.auth import get_user_model
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import json
 
 def IndexView(request):
@@ -60,5 +61,11 @@ class APINodeView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class SmartCreate(CreateView):
+    model = NodeID
+    fields = ['node_name', 'alamat']
+
+
 User = get_user_model()
+
 

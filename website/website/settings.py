@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'smart.apps.SmartConfig',
+    'bootstrap_datepicker',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

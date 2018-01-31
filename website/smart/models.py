@@ -2,10 +2,14 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.core.urlresolvers import reverse
 
 class NodeID(models.Model):
     node_name = models.CharField(max_length=250)
     alamat = models.CharField(max_length=250)
+
+    def get_absolute_url(self):
+        return reverse('smart:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.node_name + '-' + self.alamat
