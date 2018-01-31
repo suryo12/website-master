@@ -1,0 +1,128 @@
+virtualenv venv --no-site-packages --python python3
+
+
+source venv/bin/activate
+deactivate
+
+
+pip freeze
+pip freeze > requirements.txt
+pip install -r requirements.txt 
+
+
+
+django-admin startproject demoweb
+cd demoweb
+./manage.py migrate
+./manage.py runserver
+
+open 127.0.0.1:8000 -> It works
+
+
+./manage.py startapp absensi
+
+edit demoweb/demoweb/settings.py
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'absensi',
+]
+
+edit demoweb/demoweb/urls.py
+
+urlpatterns = [
+    url(r'^absensi/', include('absensi.urls',namespace='absensi')),
+    url(r'^admin/', admin.site.urls),
+]
+
+
+create file demoweb/absensi/urls.py
+
+from django.conf.urls import url
+from .views import ListAttendanceView
+
+urlpatterns = [
+    url(r'^$', ListAttendanceView.as_view(), name='ListAttendanceView'),
+]
+
+edit absensi/models.py
+
+class Attendance(models.Model):
+	name = models.CharField(max_length=250)
+	student_id = models.CharField(max_length=64)
+	university_id = models.CharField(max_length=64)
+
+	def __str__(self):
+		return self.name
+
+
+
+edit absensi/view.py
+here...
+
+
+create directory absensi/templates/absensi
+create file list_attendance.html
+
+./manage.py makemigrations absensi
+./manage.py migrate
+
+./manage.py runserver
+
+open http://localhost:8000/absensi/ 
+--> attendance is not exist
+
+
+./manage.py createsuperuser
+username: admin
+passoword: demoweb1234
+
+open http://localhost:8000/admin
+
+
+edit absensi/admin.py
+
+from django.contrib import admin
+from .models import Attendance
+admin.site.register(Attendance)
+
+open http://localhost:8000/admin
+
+add data to attendance
+
+open http://localhost:8000/absensi/ 
+--> list of attendance
+
+
+create file serializers.py
+
+edit demoweb/demoweb/settings.py
+ 
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'absensi',
+    'rest_framework',
+]
+
+edit demoweb/absensi/urls.py to add
+url(r'^api/$', APIAttendanceView.as_view(), name='APIAttendanceView'),
+
+
+edit demoweb/absensi/views.py
+to add APIAttendanceView
+
+create file posting_attendance_data.py
+python posting_attendance_data.py
+

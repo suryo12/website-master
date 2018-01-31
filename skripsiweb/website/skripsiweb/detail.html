@@ -1,0 +1,9 @@
+{% extends 'website/base.html' %}
+{%  block title %} Node Detail {% endblock %}
+
+{% block body %}
+
+    <h1>{{ nodeid.node_name }}</h1>
+    <h2>{{ nodeid.alamat }}</h2>
+
+    {% for data in nodeid.data_set.all %}

@@ -1,0 +1,13 @@
+{#% load staticfiles %#}
+{% if all_attendance %}
+	<h3>Here are all attendance:</h3>
+	<ul>
+  		{%for attendance in all_attendance%}
+    		<li><a href="{{attendance.name}}/">{{attendance.name}}</a></li>
+  		{% endfor %}
+  	
+	</ul>
+
+{% else %}
+	<h3>attendance is not exist</h3>
+{%endif%}

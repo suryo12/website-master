@@ -1,0 +1,11 @@
+{% extends 'website\base.html' %}
+
+{% block body %}
+
+    <ul>
+        {% for nodeid in all_node %}
+        <li><a href="{% url 'website:detail' nodeid.id %}"> {{ nodeid.node_name }}</a> </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

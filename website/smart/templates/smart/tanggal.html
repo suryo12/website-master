@@ -1,0 +1,11 @@
+{% extends 'smart/base.html' %}
+
+{% block body %}
+
+        <ul>
+            {% for node in nodes %}
+                <li><a href="{% url 'chartdetail' node_id=node.node_id_id tahun=node.tanggal.year bulan=node.tanggal.month hari=node.tanggal.day %}">{{ node.tanggal }}</a></li>
+            {% endfor %}
+        </ul>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+<h1>{{nodeid.node_name}}</h1>
+<h3>{{nodeid.location}}</h3>
+<ul>
+    {% for data in nodeid.data_set.all %}
+        <li>{{data.timestamp}}<br>
+            {{data.vibration}}<br>
+            {{data.coordinate_x}}
+            {{data.coordinate_y}}
+            {{data.coordinate_z}}<br>
+        </li>
+    {% endfor %}
+</ul>
+<h3><a href="{% url 'landslide:charts' nodeid.id %}">Chart</a></h3>
+

@@ -1,0 +1,13 @@
+{#% load staticfiles %#}
+{% if all_energy %}
+	<h3>Here are all energy:</h3>
+	<ul>
+  		{%for energy in all_energy%}
+    		<li><a href="{{energy.id}}/">{{energy.name}}</a></li>
+  		{% endfor %}
+  	
+	</ul>
+
+{% else %}
+	<h3>energy is not exist</h3>
+{%endif%}

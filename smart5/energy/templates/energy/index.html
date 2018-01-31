@@ -1,0 +1,10 @@
+{% if all_nodes %}
+    <h3>Here are all Node:</h3>
+<ul>
+    {% for node in all_nodes %}
+        <li><a href="/energy/{{ node.id }}/">{{ node.Nama }}</a> </li>
+    {% endfor %}
+</ul>
+{% else %}
+<h3>You don't have any Node</h3>
+{% endif %}
