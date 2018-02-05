@@ -13,6 +13,4 @@ urlpatterns = [
     url(r'^api/$', APINodeView.as_view(), name='APINodeView'),
 
 
-    url(r'smart/add/$', views.SmartCreate.as_view(), name='smart-add'),
-
 ]

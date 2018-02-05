@@ -7,6 +7,7 @@ from rest_framework import status
 from .serializer import NodeIDSerializer
 from django.contrib.auth import get_user_model
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.db.models import Avg, Max, Min
 import json
 
 def IndexView(request):
@@ -29,7 +30,9 @@ def ChartCoba(request):
 
 
 def DetailView(request, node_id):
-    nodes = Data.objects.filter(node_id=node_id)
+    now = datetime.now().date()
+    #nodes = Data.objects.filter(node_id=node_id).filter(tanggal=now)
+    nodes = Data.objects.filter(node_id=node_id).filter(tanggal=date(int(2018),int(1),int(23)))
     context = {
         'nodes': nodes
     }
@@ -60,11 +63,6 @@ class APINodeView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class SmartCreate(CreateView):
-    model = NodeID
-    fields = ['node_name', 'alamat']
-
 
 User = get_user_model()
 
