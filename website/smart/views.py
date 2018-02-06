@@ -17,12 +17,6 @@ def IndexView(request):
     }
     return render(request, 'smart/index.html', context)
 
-def ChartCoba(request):
-    nodes = NodeID.objects.all()
-    context = {
-        'nodes': nodes,
-    }
-    return render(request, 'smart/chart.html', context)
     #context_object_name = 'all_albums'
 
     #def get_queryset(self):
